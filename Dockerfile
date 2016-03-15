@@ -13,5 +13,5 @@ RUN gem install bundler
 COPY files/Gemfile* /
 RUN bundle install
 COPY files/config.ru /
-CMD ["thin","start","-R","config.ru"]
-EXPOSE 3000
+CMD ["thin","start","-R","config.ru","-p","80"]
+EXPOSE 80
