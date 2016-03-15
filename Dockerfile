@@ -1,15 +1,15 @@
-FROM debian:jessie
+FROM alpine:edge
 MAINTAINER faye.salwin@opower.com
 
-RUN apt-get update && apt-get install -y \
+RUN apk --update add \
   ca-certificates \
   ruby \
-  build-essential \
+  build-base \
+  ruby-io-console \
+  ruby-bundler \
   ruby-dev && \
-  rm -fr /var/lib/apt/lists/* && \
   rm -fr /usr/share/ri
 RUN echo 'gem: --no-document' > /.gemrc
-RUN gem install bundler
 COPY files/Gemfile* /
 RUN bundle install
 COPY files/config.ru /
